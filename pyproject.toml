@@ -1,0 +1,21 @@
+[project]
+name = "example-api"
+version = "0.1.0"
+description = "Sample FastAPI service managed with uv"
+readme = "README.md"
+requires-python = "~=3.12.0"
+authors = [
+    { name = "coderbd" }
+]
+dependencies = [
+    "fastapi[standard]",
+    "uvicorn[standard]",
+]
+
+[dependency-groups]
+dev = [
+    "httpx",
+    "pytest",
+    "pytest-cov",
+    "ruff"
+]
