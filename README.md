@@ -22,6 +22,24 @@ uv run fastapi dev api.main:app --reload
 
 Visit `http://127.0.0.1:8000/docs` for the interactive Swagger UI.
 
+## Running with Docker
+
+```bash
+# build the image (optionally pass a secret build-arg)
+docker build -t example-api .
+
+# run the container, reading runtime environment from a local `.env` file
+docker run --rm -p 8000:8000 --env-file .env example-api
+```
+
+Notes:
+- The image places the application's virtual environment at `/app/.venv` and
+	adds its `bin/` directory to `PATH`, so runtime tools installed by `uv sync`
+	(including `uvicorn`) are available automatically in the container.
+- The container starts Uvicorn with `--workers 4` by default to provide modest
+	concurrency for production-like runs. To override the worker count, run the
+	server yourself inside the container or modify the `CMD` in the `Dockerfile`.
+
 ## Running tests
 
 ```bash
